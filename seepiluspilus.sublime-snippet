@@ -1,0 +1,64 @@
+<snippet>
+	<content><![CDATA[
+%:include<bits/stdc++.h>
+using namespace std;
+
+%:ifdef ANI
+%:include "D:/DUSTBIN/local_inc.h"
+%:else
+%:define dbg(...) 0
+%:endif
+
+/*
+		&&	and
+		&=	and_eq
+		&	bitand
+		|	bitor
+		~	compl
+		!	not
+		!=	not_eq
+		||	or
+		|=	or_eq
+		^	xor
+		^=	xor_eq
+		{	<%
+		}	%>
+		[	<:
+		]	:>
+		#	%:
+		##	%:%:
+
+		{	<%	??<
+		}	%>	??>
+		[	<:	??(
+		]	:>	??)
+		#	%:	??=
+		\		??/
+		^		??'
+		|		??!
+		~		??-
+
+*/
+
+void solve(const int bitand testcase) <%
+	int n;
+	cin>>n;
+	vector<int> a(n);
+	for(int i=0;i<n;i++) <%
+		cin>>a[i];
+	%>
+%>
+
+int main() <%
+	int t;
+	cin>>t;
+	for(int i=0;i<t;i++) <%
+		solve(i+1);
+	%>	
+%>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!seepiluspilus</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

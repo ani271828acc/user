@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+ll extended_euclidean(ll a,ll b,ll &xa,ll &ya,ll &xb,ll &yb) {
+	if(!b) return a;
+	ll _xa=xb,_ya=yb,_xb=xa-(a/b)*xb,_yb=ya-(a/b)*yb;
+	xa=_xa,ya=_ya,xb=_xb,yb=_yb;
+	return extended_euclidean(b,a%b,xa,ya,xb,yb);
+}
+ 
+pair<ll,ll> linear_diophantine(ll a,ll b,ll c) {
+	/*
+		gives one sol to aX + bY = C
+		say X0, Y0 satisfies aX + bY = C
+		X0 + b/g, Y0 - a/g also satisfies
+		general solution:
+		X0 + T*(b/g), Y0 - T*(a/g)
+	*/
+	ll xa=1,ya=0,xb=0,yb=1;
+	ll g=extended_euclidean(a,b,xa,ya,xb,yb);
+    assert(g!=0 && !(c%g));
+	return {xa*(c/g), ya*(c/g)};
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!linear_diophantine</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

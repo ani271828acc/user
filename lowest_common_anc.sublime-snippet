@@ -1,0 +1,55 @@
+<snippet>
+	<content><![CDATA[
+class LCA{
+public:
+	int MB=20,N,ROOT;
+	vector<vector<int>> up,e;
+	vector<int> depth;
+	void dfs(int cur,int par) {
+		up[cur][0]=par;
+		for(int bit=1;bit<=MB;bit++) {
+			up[cur][bit]=up[up[cur][bit-1]][bit-1];
+		}
+		for(int node:e[cur]) {
+			if(node!=par) {
+				depth[node]=depth[cur]+1;
+				dfs(node,cur);
+
+			}
+		}
+	}
+	LCA(vector<vector<int>> _,int root=0){
+		e=_; N=e.size(); ROOT=root;
+		up=vector<vector<int>>(N,vector<int>(MB+1,0));
+		depth=vector<int>(N,0); dfs(ROOT,ROOT);
+	}
+	int kth(int node,int k) {
+		if(k>depth[node]) return -1;
+		int bit=0;
+		while(k) {
+			if(k&1) node=up[node][bit];
+			k>>=1; bit++;
+		}
+		return node;
+	}
+	int getlca(int u, int v) {
+		if(depth[u]<depth[v]) swap(u, v);
+		for(int bit=MB;bit>=0;bit--) 
+			if(depth[u]-(1<<bit)>=depth[v])
+				u=up[u][bit];
+		if(u==v) return u;
+		for(int bit=MB;bit>=0;bit--) 
+			if(up[u][bit]!=up[v][bit])
+				u=up[u][bit],v=up[v][bit];
+		return up[u][0];
+	}
+	int dist(int u,int v) {
+		return depth[u]+depth[v]-2*depth[getlca(u,v)];
+	}
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!lca</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,57 @@
+<snippet>
+	<content><![CDATA[
+class SCC{
+public:
+	int n;
+	vector<int> vis,ord,comp,roots,root_nodes,sz,ind;
+	vector<vector<int>> e,e_rev,e_scc;
+	SCC(vector<vector<int>> _) {
+		e=_; n=_.size(); e_rev=e_scc=vector<vector<int>>(n);
+		for(int i=0;i<n;i++) {
+			for(int j:e[i]) {
+				e_rev[j].push_back(i);
+			}
+		}
+		vis.assign(n,0); roots=sz=ind=vis;
+		for(int i=0;i<n;i++) {
+			if(not vis[i]) dfs1(i);
+		}
+		vis.assign(n,0);
+		reverse(ord.begin(),ord.end());
+		for(int v:ord) {
+			if(not vis[v]) {
+				dfs2(v);
+				int root=comp.front();
+				for(int u:comp) roots[u]=root;
+				root_nodes.push_back(root);
+				sz[root]=comp.size();
+				comp.clear();
+			}
+		}	
+		for(int i=0;i<n;i++) {
+		    for (int j:e[i]) {
+		    	int ri=roots[i],rj=roots[j];
+		        if(ri!=rj) {
+		            e_scc[ri].push_back(rj);
+		            ind[rj]++;
+		        }
+		    }
+		}
+	} 
+	void dfs1(int v) {
+		vis[v]=1;
+		for(int u:e[v]) if(not vis[u]) dfs1(u);
+		ord.push_back(v);
+	}
+	void dfs2(int v) {
+		vis[v]=1;
+		comp.push_back(v);
+		for(int u:e_rev[v]) if(not vis[u]) dfs2(u);
+	}
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!SCC</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

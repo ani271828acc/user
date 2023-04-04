@@ -1,0 +1,35 @@
+<snippet>
+	<content><![CDATA[
+ll fastexp(ll base,ll exp) {
+	ll res=1;
+	base%=mod;
+	while(exp) {
+		if(exp&1) res=(res*base)%mod;
+		base=(base*base)%mod;
+		exp>>=1;
+	}
+	return res;
+}
+
+ll modinv(ll num) {
+	return fastexp(num, mod-2);
+}
+
+vector<ll> facts;
+void compute_facts(ll n=1e6) {
+	facts=vector<ll>(n+1,1);
+	for(ll i=2;i<n+1;i++) {
+		facts[i]=facts[i-1]*i%mod;
+	}
+}
+
+ll ncr(ll n,ll r) {
+	if(facts.size()<=n) compute_facts(n);
+	return facts[n]*modinv(facts[n-r]*facts[r]%mod)%mod;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!delhi</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

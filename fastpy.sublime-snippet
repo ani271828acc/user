@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+import sys
+
+def read(T=int):
+	return [T(i) for i in sys.stdin.readline().split()]
+
+def solve():
+	pass
+
+def main():
+	for i in range(read(int)[0]):
+		solve()
+
+main()
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!fpy</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

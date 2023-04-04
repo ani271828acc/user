@@ -1,0 +1,19 @@
+<snippet>
+	<content><![CDATA[
+def read():
+	return [int(i) for i in input().split()]
+
+def solve():
+	pass
+
+def main():
+	for i in range(int(input())):
+		solve()
+
+main()
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!py</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

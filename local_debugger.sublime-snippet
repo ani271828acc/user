@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+#ifdef ANI
+#include "D:/DUSTBIN/local_inc.h"
+#else
+#define dbg(...) 0
+#endif
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!gbd</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

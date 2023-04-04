@@ -1,0 +1,31 @@
+<snippet>
+	<content><![CDATA[
+class dsu{
+public:
+	int N;
+	vector<int> par,size;
+	dsu(int n) {
+		N=n;
+		par=size=vector<int>(N,1);
+		for(int i=0;i<N;i++) {
+			par[i]=i;
+		}
+	}
+	int find(int u) {
+		return par[u]==u?u:par[u]=find(par[u]);
+	}
+	int join(int u,int v) {
+		u=find(u),v=find(v);
+		if(u==v) return 0;
+		if(size[u]<size[v]) swap(u,v);
+		par[v]=u;
+		size[u]+=size[v];
+		return 1;
+	}
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!dsu</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

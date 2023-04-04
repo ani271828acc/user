@@ -1,0 +1,45 @@
+<snippet>
+	<content><![CDATA[
+template<unsigned int N,const char baseChar,typename T=int>
+class Trie {
+public:
+	struct node{
+		T count=0;
+		vector<int> next;
+		node(){next=vector<int>(N,-1);}
+	};
+	vector<node> tree;
+	Trie(){
+		tree.push_back(node());
+	}
+	void add(string &s,int ct) {
+		int p=0;
+		tree[p].count+=ct;
+		for(int i=0;i<s.size();i++) {
+			int j=s[i]-baseChar;
+			if(tree[p].next[j]==-1) {
+				tree[p].next[j]=tree.size();
+				tree.push_back(node());
+			}
+			p=tree[p].next[j];
+			tree[p].count+=ct;
+		}
+	}
+    int longestPrefix(const string &s) {
+    	int p=0;
+   		for(int i=0;i<s.size();i++) {
+   			int j=s[i]-baseChar;
+   			assert(j<N);
+   			if(tree[p].next[j]==-1 or tree[tree[p].next[j]].count==0)
+   				return i;
+   			p=tree[p].next[s[i]-baseChar];
+   		}
+   		return s.size();
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!TrieString</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

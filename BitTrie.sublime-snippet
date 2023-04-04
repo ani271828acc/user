@@ -1,0 +1,49 @@
+<snippet>
+	<content><![CDATA[
+template<unsigned int B>
+class BitTrie {
+public:
+	using T=typename conditional<B<=31,int,long long>::type;
+	class node {
+	public:
+		T ct; array<int,2> nxt;
+		node(): ct(0),nxt({-1,-1}){}
+	};
+	vector<node> v;
+	BitTrie() {
+		v.emplace_back();
+	}
+	void add(T x,T k) {
+		assert(x>=0&&(x>>B)==0);
+		int p=0;
+		v[p].ct+=k;
+		for(int bit=B-1;bit>=0;bit--) {
+			int j=x>>bit&1;
+			if(v[p].nxt[j]<0) {
+				v[p].nxt[j]=v.size();
+				v.emplace_back();
+			}
+			p=v[p].nxt[j];
+			v[p].ct+=k;
+		}
+	}
+	T max(T x=0) {
+		assert(x>=0&&(x>>B)==0);
+		int p=0; T res=0;
+		for(int bit=B-1;bit>=0;bit--) {
+			res<<=1;
+			int j=x>>bit&1;
+			if(v[p].nxt[!j]>=0 && v[v[p].nxt[!j]].ct>0) {
+				p=v[p].nxt[!j];
+				res|=1;
+			} else p=v[p].nxt[j];
+		}
+		return res;
+	}
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!BitTrie</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

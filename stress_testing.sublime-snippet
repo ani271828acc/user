@@ -1,0 +1,42 @@
+<snippet>
+	<content><![CDATA[
+#include<bits/stdc++.h>
+using namespace std;
+using ll=long long;
+const ll inf=1e9+7;
+using namespace std::chrono;
+
+mt19937 mt(time(0));
+
+#ifdef ANI
+#include "local_inc.h"
+#else
+#define dbg(...) 0
+#endif
+
+void test_correctness() {
+
+}
+
+void test_speed() {
+	auto timetaken=[&](auto &&f,string message="speed: ")->int{
+		high_resolution_clock::time_point t1,t2;
+		t1 = high_resolution_clock::now();
+		f(); // call function here 
+		t2 = high_resolution_clock::now();
+		duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
+		cout<<message<< (time_span.count()*1000)<<" ms"<<endl;
+	};
+}
+
+int main() {
+	for(int i=0;i<20;i++) {
+		test_correctness();
+	}	
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!stress_testing</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

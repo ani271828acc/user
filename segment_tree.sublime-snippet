@@ -1,0 +1,46 @@
+<snippet>
+	<content><![CDATA[
+template<typename T>
+class segtree{
+private:
+    int N; T BASECASE;
+    T(* f)(T a,T b);
+    vector<T> tree,ar;
+    T build(int v,int tl,int tr) {
+        if(tl==tr) return tree[v]=ar[tl]; 
+        int tm=(tl+tr)/2;
+        return tree[v]=f(build(2*v,tl,tm),build(2*v+1,tm+1,tr));
+    }
+    T _ask(int v,int tl,int tr,int ql,int qr) {
+        if(tl>qr||tr<ql) return BASECASE;
+        if(tl>=ql&&tr<=qr) return tree[v];
+        int tm=(tl+tr)/2;
+        return f(_ask(2*v,tl,tm,ql,qr),_ask(2*v+1,tm+1,tr,ql,qr));
+    }   
+    T _set(int v,int tl,int tr,int idx,T val) {
+        if(tl>idx||tr<idx) return tree[v];
+        if(tl==tr) return tree[v]=val;
+        int tm=(tl+tr)/2;
+        return tree[v]=f(_set(2*v,tl,tm,idx,val),_set(2*v+1,tm+1,tr,idx,val));
+    }
+public:
+    segtree(vector<T>_,T bc=0,T(*_f)(T a,T b)=[](T a,T b){ return a+b; }) {
+        f=_f; ar=_; BASECASE=bc;
+        N=ar.size(); tree=vector<T>(4*N,BASECASE);
+        build(1,0,N-1);
+    }
+    T ask(int ql,int qr) {
+        if(qr<ql) return BASECASE;
+        return _ask(1,0,N-1,ql,qr);
+    }
+    void set(int idx,T val) {
+        assert(idx>=0&&idx<N);
+        _set(1,0,N-1,idx,val);
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!segtree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,29 @@
+<snippet>
+	<content><![CDATA[
+import sys
+from sympy import *
+
+def read(T):
+	return [T(i) for i in sys.stdin.readline().split()]
+
+def show(a):
+	n,m=shape(a)
+	for i in range(n):
+		row=a.row(i)
+		for j in range(m):
+			print(row[j],end=" ")
+		print()
+
+
+def main():
+	n,m=read(int)
+	a=Matrix([read(int) for i in range(n)])
+	show(a)
+
+main()
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!pymat</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

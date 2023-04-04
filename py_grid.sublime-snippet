@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+import sys
+
+def read(T):
+    return [T(i) for i in sys.stdin.readline().split()]
+
+def get_grid(n,m):
+    g=["".join([" _" for i in range(m)])]
+    for i in range(n):
+        g.append("".join(["|" if i%2==0 else "_" for i in range(2*m+1)]))
+    return g
+
+n,m=read(int)
+
+grid=get_grid(n,m)
+for row in grid:
+    print(row)
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!py_grid</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

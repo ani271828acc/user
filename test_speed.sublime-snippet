@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+auto timetaken=[&](auto &&f,string message="speed: ")->int{
+	high_resolution_clock::time_point t1,t2;
+	t1 = high_resolution_clock::now();
+	f(); // call function here 
+	t2 = high_resolution_clock::now();
+	duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
+	cout<<message<< (time_span.count()*1000)<<" ms"<<endl;
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>!test_speed</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
